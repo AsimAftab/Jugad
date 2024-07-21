@@ -1,0 +1,55 @@
+#include<stdio.h>
+#include<stdbool.h>
+#include<limits.h>
+
+
+#define SIZE 6
+
+int main()
+{
+    int n,i,j,k;
+    printf("\nEnter no of vertices: ");
+    scanf("%d",&n);
+    int cost[SIZE][SIZE];
+    bool visited[SIZE];
+    int srcVertex=0;
+    printf("\nEnter the adjacency matrix(0 for self loop and 999 for no edge)");
+    for(i=0;i<n;i++)
+    {
+        for(j=0;j<n;j++)
+        {
+            scanf("%d",&cost[i][j]);
+        }
+    }
+    for(i=0;i<n;i++)
+    {
+        visited[i]=false;
+    }
+    int tot_cost=0,source=0,target=0;
+    visited[srcVertex]=true;
+    printf("\nEdge: ");
+    for(i=1;i<n;i++)
+    {
+        int min=INT_MAX;
+        for(j=0;j<n;j++)
+        {
+            if(visited[j])
+            {
+                for(k=0;k<n;k++)
+                {
+                    if(!visited[k] && min>cost[j][k])
+                    {
+                        min=cost[j][k];
+                        source=j;
+                        target=k;
+                    }
+                }
+            }
+        }
+        visited[target]=true;
+        printf("(source %d) -> (target %d)=min %d\n",source,target,min);
+        tot_cost+=min;
+
+    }
+    printf("\nMinimum Spanning Tree: %d",tot_cost);
+}
