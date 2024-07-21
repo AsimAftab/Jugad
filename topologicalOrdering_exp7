@@ -1,0 +1,42 @@
+#include<stdio.h>
+
+int visit[10],s[10],top=-1,adj[10][10];
+
+void dfs(int,int);
+
+int main()
+{
+    int i,j,n=4;
+    printf("\nEnter the adjacency matrix: ");
+    for(i=1;i<=n;i++)
+    {
+        visit[i]=0;
+        for(j=1;j<=n;j++)
+        {
+            scanf("%d",&adj[i][j]);
+        }
+    }
+    for(i=1;i<=n;i++)
+    {
+        if(!visit[i])
+            dfs(i,n);
+    }
+    while(top!=-1)
+    {
+        printf("%d->",s[top--]);
+    }
+    return 0;
+}
+
+void dfs(int v,int n)
+{
+    visit[v]=1;
+    int i;
+    for(i=1;i<=n;i++)
+    {
+        if(!visit[i] && adj[v][i]){
+            dfs(i,n);
+        }
+    }
+    s[++top]=v;
+}
