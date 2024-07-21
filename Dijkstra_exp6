@@ -1,0 +1,50 @@
+//Dijkstra
+#include<stdio.h>
+
+int main()
+{
+    int cost[15][15],s[15],u,v,w,i,j,dist[15],num,min,n;
+    printf("\nEnter the no vertices: ");
+    scanf("%d",&n);
+    printf("\nEnter the adjacency matrix 999 for self loop or no edge: ");
+    for(i=1;i<=n;i++)
+    {
+        for(j=1;j<=n;j++)
+        {
+            scanf("%d",&cost[i][j]);
+
+        }
+    }
+    printf("\nEnter the source vertex: ");
+    scanf("%d",&v);
+    for(i=1;i<=n;i++)
+    {
+        s[i]=0;
+        dist[i]=cost[v][i];
+    }
+    s[v]=1;
+    dist[v]=1;
+    for(num=2;num<=n-1;num++)
+    {
+        min=999;
+        for(w=1;w<=n;w++)
+        {
+            if(s[w]==0 && dist[w]<min)
+            {
+                min=dist[w];
+                u=w;
+            }
+        }
+        s[u]=1;
+        for(w=1;w<=n;w++)
+        {
+            if(s[w]==0)
+                if(dist[w]>dist[u]+cost[u][w])
+                    dist[w]=(dist[u]+cost[u][w]);
+        }
+    }
+    printf("VERTEX\tDESTINATION\tCOST\n");
+    for(i=1;i<=n;i++)
+        printf(" %d \t %d \t %d \n",v,i,dist[i]);
+
+}
