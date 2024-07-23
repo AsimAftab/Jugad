@@ -1,0 +1,204 @@
+Question 1
+Create table employee(
+Empno varchar(10),
+Ename char(20),
+Job  char(20),
+Manager_no varchar(20),
+Salary number(10,2),
+Commission number(10)
+);
+
+Insert into employee VALUES (&empno, '&ename', '&job', '&manager_no', &salary, &commission);
+Insert 2 values
+Commit;
+Insert 3rd value
+Rollback;
+Check before and after using 
+select * from employee;
+
+delete employee;
+alter table employee
+add constraint pk_employee_empno primary key(empno);
+
+alter table employee
+modify manager_no varchar(20)not null;
+
+insert into employee values(null,null,null,null,null,null);
+
+
+Question 2: -
+Create table employee(
+Empno number(10),
+Ename char(20),
+Job char(20),
+Mgr number(20),
+Sal number(10,2)
+);
+
+Desc employee;
+
+//to add column commission
+Alter table employee
+Add commission number(10);
+
+//check added column
+Desc employee;
+
+//insert 5 values bt keep the value of job null in all of them
+Insert into employee values(1,’a’,null,1,123,23);
+Insert into employee values(2,’b’,null,1,123,23);
+Insert into employee values(3,’c’,null,1,123,23);
+Insert into employee values(4,’d’,null,1,123,23);
+Insert into employee values(5,’e’,null,1,123,23);
+
+//update job values
+Update employee
+Set job=’job1’
+Where empno=1;
+Update employee
+Set job=’job2’
+Where empno=2;
+Update employee
+Set job=’job3’
+Where empno=3;
+Update employee
+Set job=’job4’
+Where empno=4;
+Update employee
+Set job=’job5’
+Where empno=5;
+
+//rename column
+Alter table employee
+Rename column job to designation;
+
+//
+Delete from employee where empno=5;
+
+
+Question 3: 
+//create table and enter 3 values
+Create table employee(
+E_id number(10),
+E_name char(20),
+Age number(3),
+Salary number(10,2)
+);
+Insert into employee values(&e_id,’&e_name’,&age,&salary);//make 2 employees have same salary
+
+
+//count no of employee names
+Select count(e_name)
+From employee;
+
+//max age
+Select max(age)
+From employee;
+
+//min age
+Select min(age)
+From employee;
+
+//display salary in ascending order
+Select e_name,salary
+From employee
+Order by salary asc;
+//to find grouped salaries of employee
+select count(e_id),salary
+From employee
+Group by salary;
+
+
+Question 4:
+Set serveroutput on;
+
+Create table customer(
+Id number(10),
+Name char(20),
+Age number(3),
+Address varchar(200),
+Salary number(10,2)
+);
+
+//insert 2/3 values
+Insert into customer values(&id,’&name’,&age,’&address’,&salary);
+
+//creating triggers
+create or replace trigger display_sal_changes
+before insert or delete or update
+on customer
+for each row
+declare
+	sal_diff number;
+begin
+	if inserting then
+		dbms_output.put_line('inserting row');
+		dbms_output.put_line('new salary:' || :new.salary);
+	elsif updating then
+		sal_diff:=:new.salary-:old.salary;
+		dbms_output.put_line('Old salary:' || :old.salary);
+		dbms_output.put_line('new salary:' || :new.salary);
+		dbms_output.put_line('sal diff:' || sal_diff);
+	elsif deleting then
+		dbms_output.put_line('Deleting row');
+		dbms_output.put_line('old salary:' || :old.salary);
+	end if;
+end;
+
+
+create or replace trigger display_sal_changes
+before insert or delete or update on customer 
+for each row 
+when(new.id>0)
+declare sal_diff number;
+begin
+sal_diff :=:new.salary-:old.salary;
+dbms_output.put_line('Old Salary'  || :old.salary);
+
+dbms_output.put_line('New Salary'  || :new.salary);
+
+dbms_output.put_line('Salary Diff'  || sal_diff);
+end;
+/
+
+//put a ‘/’ after this line is executed
+//check trigger working  by inserting updating and deleting
+Insert into customer values(&id,’&name’,&age,’&address’,&salary);
+Update customer 
+Set salary=286323
+Where id=2;
+
+Delete from customer
+Where id=1;
+
+
+Question 5:
+set serveroutput on;
+create table employee(
+e_id number(10),
+e_name char(20),
+age number(2),
+salary number(10,2)
+);
+
+//insert 4 values using
+insert into employee values(&e_id,'&ename',&age,&salary);
+
+declare
+	cursor c1 is
+	select e_id,e_name,age,salary
+	from employee;
+	id employee.e_id%type;
+	name employee.e_name%type;
+	e_age employee.age%type;
+	e_salary employee.salary%type;
+	begin
+		open c1;
+		loop
+			fetch c1 into id,name,e_age,e_salary;	
+			exit when c1%NOTFOUND;
+			dbms_output.put_line(id ||'	'|| name ||'	'|| e_age ||'	'|| e_salary);
+		end loop;	
+		close c1;
+end; 
+//put '/' at the end of this
