@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xml-stylesheet type="text/css" href="pro.css" ?>
+
+<STUDENTDATA>
+    <STUDENT>
+        <USN>USN: 1BY22CS030</USN>
+        <NAME>NAME: ASIM AFTAB </NAME>
+        <COLLEGE> COLLEGE: BMSIT </COLLEGE>
+        <BRANCH> BRANCH: CSE </BRANCH>
+        <YEAR> YEAR: 2022 </YEAR>
+        <EMAIL> EMAIL: ASIMAFTAB303@GMAIL.COM </EMAIL>
+    </STUDENT>
+</STUDENTDATA>

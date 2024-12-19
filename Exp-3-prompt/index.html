@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Prompt Program</title>
+</head>
+<body>
+	<script type="text/javascript">
+		var str = prompt("Enter the input (either number or string):");
+		if(!isNaN(str))
+		{
+			var num=parseInt(str);
+			var remainder, rev=0;
+			while(num!=0)
+			{
+				remainder=num%10;
+				rev=rev*10+remainder;
+				num=Math.floor(num/10);
+			}
+			alert("The reverse of " +str+ " is "+ rev);
+		}
+		else{
+			str=str.toUpperCase();
+			var foundVowel=false;
+
+			for(var i=0;i<str.length;i++)
+			{
+				var chr=str.charAt(i);
+				if(chr=="A" || chr ="E" || chr=="I" || chr=="O" || chr=="U")
+				{
+					alert("The position of left most vowel is " +(i+1));
+					foundVowel=true;
+					break;
+				}
+			}
+			if(!foundVowel)
+			{
+				alert("No vowel found in the input");
+			}
+		}
+	</script>
+</body>
+</html>

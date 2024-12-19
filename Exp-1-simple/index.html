@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="style.css">
+	<script type="text/javascript" src="external.js"></script>
+
+	<title>Simple Calculator</title>
+</head>
+<body>
+	<table border='black' class="table">
+		<tr>
+			<td colspan="3">
+				<label>Value 1</label>
+				<input type="text" id ="inputArea1" name="Enter value 1" placeholder="Enter value 1">
+			</td>
+
+			
+		</tr>
+		<tr>
+			<td>
+				<label>Value 2</label>
+				<input type="text" id ="inputArea2" name="Enter value 2" placeholder="Enter value 2">
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				<label>Answer</label>
+				<input type="text" id ="answer" name="answer" placeholder="answer">
+			</td>
+		</tr>
+		<tr>
+		<td>
+				<input type="button" onclick="calculate('+')" value="Addition">
+				
+				<input type="button" onclick="calculate('-')" value="Subtraction">
+			</td>
+		
+		</tr>
+		<tr>
+		<td>
+				<input type="button" onclick="calculate('/')" value="Divison">
+				
+				<input type="button" onclick="calculate('*')" value="Multiplication">
+			</td>
+		
+		</tr>
+		<td>
+				<input type="button" onclick="clearfield()" value="Clear">
+			
+			</td>
+		
+		</tr>
+	</table>
+</body>
+</html>
